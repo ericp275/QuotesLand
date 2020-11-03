@@ -1,0 +1,97 @@
+<aura:component controller="posterDatabase">
+    <aura:attribute name="poster" type="Poster__c"/>
+    <aura:attribute name="imgUrl" type="String"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <p>The poster Id is {!v.poster.Id}</p>
+    <div class="slds-grid slds-gutters slds-grid_align-center">
+            <div class="slds-col slds-size_1-of-3 posterProductPreview">
+                <img class="productPreview1" src="{!v.imgUrl}"/>
+                <lightning:button label="Buy 1 poster: $15"  onclick="{!c.orderPosters}"/>
+        </div>
+        <div class="slds-col slds-size_1-of-3 posterProductPreview">
+            <div class="stackEffect">
+                <div class="stackEffect">
+                    <div class="stackEffect">
+                        <div class="stackEffect">
+                            <div class="stackEffect">
+                                <img class="productPreview2" src="{!v.imgUrl}"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <lightning:button label="Buy 10 poster: $85"  onclick="{!c.orderPosters}"/>
+        </div>
+        <div class="slds-col slds-size_1-of-3 posterProductPreview">
+            <div class="stackEffect stackEffectLeft">
+                <div class="stackEffect">
+                    <div class="stackEffect">
+                        <div class="stackEffect">
+                         	<div class="stackEffect">
+                         		<div class="stackEffect">
+                         			<div class="stackEffect">
+                                        <div class="stackEffect">
+                         				<img class="productPreview3" src="{!v.imgUrl}"/>
+                                        </div>
+            						</div>
+            					</div>
+            				</div>
+            			</div>
+            		</div>
+            	</div>
+            </div>
+            <div class="stackEffect" style="margin-left: 179px">
+                <div class="stackEffect">
+                    <div class="stackEffect">
+                        <div class="stackEffect">
+                         	<div class="stackEffect">
+                         		<div class="stackEffect">
+                         			<div class="stackEffect">
+                                        <div class="stackEffect">
+                         				<img class="productPreview3" src="{!v.imgUrl}"/>
+                                        </div>
+            						</div>
+            					</div>
+            				</div>
+            			</div>
+            		</div>
+            	</div>
+            </div>
+            <div class="stackEffect stackEffectLeft">
+                <div class="stackEffect">
+                    <div class="stackEffect">
+                        <div class="stackEffect">
+                         	<div class="stackEffect">
+                         		<div class="stackEffect">
+                         			<div class="stackEffect">
+                                        <div class="stackEffect">
+                         				<img class="productPreview3" src="{!v.imgUrl}"/>
+                                        </div>
+            						</div>
+            					</div>
+            				</div>
+            			</div>
+            		</div>
+            	</div>
+            </div>
+            <div class="stackEffect" style="margin-left: 179px">
+                <div class="stackEffect">
+                    <div class="stackEffect">
+                        <div class="stackEffect">
+                         	<div class="stackEffect">
+                         		<div class="stackEffect">
+                         			<div class="stackEffect">
+                                        <div class="stackEffect">
+                         				<img class="productPreview3" src="{!v.imgUrl}"/>
+                                        </div>
+            						</div>
+            					</div>
+            				</div>
+            			</div>
+            		</div>
+            	</div>
+            </div>
+            <lightning:button label="Buy 200 poster: $800" onclick="{!c.orderPosters}"/>
+        </div>
+    </div>
+</aura:component>

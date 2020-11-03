@@ -1,0 +1,121 @@
+<aura:component controller="posterMakerController" implements="flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes">
+    <aura:attribute name="showingPoster" type="Boolean" default="false"/>
+    <aura:attribute name="showingBuyScreen" type="Boolean" default="false"/>
+    <aura:attribute name="customImage" type="Boolean" default="false"/>
+    <aura:attribute name="pictureId" type="Picture__c"/>
+    <aura:attribute name="poster" type="Poster__c" default="{Id: 'a024W00000J8YDmQAN'}"/>
+    <aura:attribute name="QuotationId" type="Quotation__c"/>
+    <aura:attribute name="imageKeywordCategory" type="String"/>
+    <aura:attribute name="imageKeyword" type="String"/>
+    <aura:attribute name="imageKeywordCustom" type="String"/>
+    <aura:attribute name="quoteKeywordCategory" type="String"/>
+    <aura:attribute name="quoteKeyword" type="String"/>
+    <aura:attribute name="imageKeywordList" type="String[]"
+                 default="['landscape','forest','beach','volcano','stars']"/>
+       <aura:attribute name="quoteKeywordList" type="String[]"
+                 default="['inspirational','funny','happy','crazy']"/>
+ 	<aura:attribute name="quote" type="String"
+                 default="To climb steep hills requires a slow pace at first."/>
+    <aura:attribute name="author" type="String"
+                 default="-William Shakespeare"/>
+    <aura:attribute name="textHeight" type="Integer"
+                 default="-200"/>
+    <aura:attribute name="textSize" type="Integer"
+                 default="50"/>
+    <aura:attribute name="textWidth" type="Integer"
+                 default="100"/>
+    <aura:attribute name="imageHeight" type="Integer"
+                 default="400"/>
+    <aura:attribute name="textLeftMargin" type="Integer"
+                 default="25"/>
+    <aura:attribute name="textColor" type="String" default="#ffffff"/>
+    <aura:attribute name="imageUrl" type="String"
+                    default='https://images.pexels.com/photos/2880507/pexels-photo-2880507.jpeg?auto=compress&amp;cs=tinysrgb&amp;h=350'/>
+    <aura:registerEvent name="changeTextLimits" type="c:broadcastUpdate"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="changeHeight" event="c:textPlacement" action="{!c.changeTextHeight}"/>
+    <aura:handler name="changeWidth" event="c:textPlacement" action="{!c.changeTextWidth}"/>
+    <aura:handler name="changeLeftMargin" event="c:textPlacement" action="{!c.changeTextLeftMargin}"/>
+    <aura:handler name="changeColor" event="c:textColor" action="{!c.changeTextColor}"/>
+    <aura:handler name="saveThisPoster" event="c:textPlacement" action="{!c.savePoster}"/>
+    <aura:if isTrue="{!!v.showingBuyScreen}">
+    <aura:if isTrue="{!v.showingPoster}">
+        <div class="slds-grid slds-gutters">
+            <lightning:card title="Edit Text" class="slds-col slds-size_1-of-6">
+                <c:PosterTextEditor/>
+        </lightning:card>
+            <lightning:card class=" slds-col posterHolder">
+                <div style="{!'height:' + (v.imageHeight / 2 + 150) + 'px'}">
+            <div class="landscapePicture">
+                <img src="{!v.imageUrl}" onload="{!c.setImageBoundaries}" aura:id="posterImage"/>
+                <div class="quoteHolder" aura:id="QuoteHolder" style="{!'font-size:' + v.textSize + 'px;color:' + v.textColor + ';margin-top:' + v.textHeight + 'px;width:' + v.textWidth + '%;padding-left:' + v.textLeftMargin + 'px'}">
+                    <p aura:id="QuoteText"></p>
+                    <p class="author">{!v.author}</p>
+                </div>
+            </div>
+                </div>
+        </lightning:card>
+
+            <lightning:card class="slds-col">
+                <c:PosterVoter/>
+        </lightning:card>
+      </div>
+        </aura:if>
+        <div class="slds-grid slds-gutters slds-grid_align-center" style="padding-top:25px; padding-bottom: 25px;">
+            <aura:if isTrue="{!v.showingPoster}">
+     <lightning:button class="slds-col slds-size_1-of-4" label="Generate New Image" onclick="{!c.getImage}"/>
+     <lightning:button class="slds-col slds-size_1-of-4" label="Generate New Quotation" onclick="{!c.getQuotation}"/>
+    </aura:if>
+    <lightning:button class="slds-col slds-size_1-of-4" label="Generate New Poster" onclick="{!c.getPoster}"/>
+        </div>
+    <lightning:card title="Image" class="slds-col">
+        <div class="slds-grid slds-gutters slds-grid_align-center">
+            <div class="slds-col slds-size_1-of-3">
+        <lightning:select name="imageSelect" label="Theme" required="false" value="{!v.imageKeywordCategory}" 
+                          onchange="{!c.changeKeywordList}">
+            <option value="Landscape">Landscape</option>
+            <option value="Custom">Custom</option>
+            <option value="Animal">Animal</option>
+            <option value="Sport">Sport</option>
+    	</lightning:select>
+            </div>
+            <aura:if isTrue="{!!v.customImage}">
+            <div class="slds-col slds-size_1-of-3">
+        <lightning:select name="imageSelect2" label="Keyword" required="false" value="{!v.imageKeyword}">    
+            <aura:iteration items="{!v.imageKeywordList}" var="word">
+				<option value="{!word}">{!word}</option>                
+            </aura:iteration>
+    	</lightning:select>
+            </div>
+            </aura:if>
+            <aura:if isTrue="{!v.customImage}">
+            <div class="slds-col slds-size_1-of-3">
+                <lightning:input name="imageSelectCustom" label="Keyword" value="{!v.imageKeywordCustom}" />
+            </div>
+                </aura:if>
+             </div>
+    </lightning:card>
+    <lightning:card title="Quotation" class="slds-col">
+        <div class="slds-grid slds-gutters slds-grid_align-center">
+            <div class="slds-col slds-size_1-of-3">
+        <lightning:select name="quotationSelect" label="Type" required="false" value="{!v.quoteKeywordCategory}" 
+                          onchange="{!c.changeQuoteKeywordList}">
+            <option value="Tag">Tag</option>
+            <option value="Author">Author</option>
+            <option value="Title">Title</option>
+    	</lightning:select>
+            </div>
+            <div class="slds-col slds-size_1-of-3">
+        <lightning:select name="QuotationSelect2" label="Keyword" required="false" value="{!v.quoteKeyword}">    
+            <aura:iteration items="{!v.quoteKeywordList}" var="word">
+				<option value="{!word}">{!word}</option>                
+            </aura:iteration>
+    	</lightning:select>
+            </div>
+             </div>
+    </lightning:card>
+    </aura:if>
+    <aura:if isTrue="{!v.showingBuyScreen}">
+        <c:BuyScreen poster="{!v.poster}" imgUrl="{!v.imageUrl}"/>
+    </aura:if>
+</aura:component>

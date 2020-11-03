@@ -1,0 +1,19 @@
+.THIS {
+}
+.THIS .quoteHolder{
+    padding-right: 50px;
+}
+.THIS .author{
+    padding-right: 85px;
+    font-size: 40px;
+    text-align: right;
+}
+.THIS .posterHolder{
+    width: 1000px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.THIS .landscapePicture{
+    width:960px;
+    margin-bottom: 100px;
+}

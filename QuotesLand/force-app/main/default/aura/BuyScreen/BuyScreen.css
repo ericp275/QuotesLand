@@ -1,0 +1,23 @@
+.THIS {
+}
+.THIS .stackEffect{
+    border-style: groove;
+    background-color: white;
+    border-width: 3px 0 0 3px;
+    margin: 2px 0 0 4px;
+}
+.THIS .productPreview1{
+    height: 450px;
+}
+.THIS .productPreview2{
+    height: 426px;
+}
+.THIS .productPreview3{
+    height: 185px;
+}
+.THIS .stackEffectLeft{
+    float:left;
+}
+.THIS .posterProductPreview{
+    height: 450px;
+}

@@ -1,0 +1,8 @@
+<aura:component controller="posterDatabase">
+    <aura:registerEvent name="saveThisPoster" type="c:textPlacement"/>
+    <lightning:card title="Vote on this poster">
+    </lightning:card>
+     <lightning:card title="Buy this poster">
+         <lightning:button label="Buy poster" onclick="{!c.savePoster}"/>
+    </lightning:card>
+</aura:component>

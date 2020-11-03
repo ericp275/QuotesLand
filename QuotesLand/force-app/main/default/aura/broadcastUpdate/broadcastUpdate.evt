@@ -1,0 +1,4 @@
+<aura:event type="APPLICATION" >
+    <aura:attribute name="stat" type="Integer"/>
+    <aura:attribute name="stat2" type="Integer"/>
+</aura:event>

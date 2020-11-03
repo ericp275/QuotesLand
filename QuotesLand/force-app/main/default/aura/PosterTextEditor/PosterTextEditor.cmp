@@ -1,0 +1,40 @@
+<aura:component >
+    <aura:attribute name="textHeight" type="Integer" default="0"/>
+    <aura:attribute name="textLeftMargin" type="Integer" default="0"/>
+    <aura:attribute name="textWidth" type="Integer" default="100"/>
+    <aura:attribute name="textColor" type="String" default="#ffffff"/>
+    <aura:attribute name="maxHeight" type="Integer" default="100"/>
+    <aura:attribute name="maxWidth" type="Integer" default="100"/>
+    <aura:registerEvent name="changeHeight" type="c:textPlacement"/>
+    <aura:registerEvent name="changeWidth" type="c:textPlacement"/>
+    <aura:registerEvent name="changeLeftMargin" type="c:textPlacement"/>
+    <aura:registerEvent name="changeColor" type="c:textColor"/>
+    <aura:handler event="c:broadcastUpdate" action="{!c.changeTextLimits}"/>
+	<lightning:slider label="textHeight" value="{!v.textHeight}" max="{!v.maxHeight}" type="vertical" variant="label-hidden" onchange="{!c.changeTextHeight}"/>
+    <lightning:slider label="textWidth" value="{!v.textWidth}" variant="label-hidden" onchange="{!c.changeTextWidth}"/>
+    <lightning:slider label="textLeftMargin" value="{!v.textLeftMargin}" max="{!v.maxWidth}" variant="label-hidden" onchange="{!c.changeTextLeftMargin}"/>
+    
+    <div class="slds-color-picker">
+        <lightning:input name="textColorDisplay" label="Text Color:" value="{!v.textColor}" onchange="{!c.changeTextColor}"/>
+    <section aria-label="Choose a color" class="slds-color-picker__selector">
+    <div style="width: 200px;">
+        <lightning:button label="#c2dbf7" class="colorButton color1" onclick="{!c.changeTextColor}"/>
+        <lightning:button label="#9de7da" class="colorButton color2" onclick="{!c.changeTextColor}"/>
+        <lightning:button label="#9df0c0" class="colorButton color3" onclick="{!c.changeTextColor}"/>
+        <lightning:button label="#fff099" class="colorButton color4" onclick="{!c.changeTextColor}"/>
+        <lightning:button label="#fed49a" class="colorButton color5" onclick="{!c.changeTextColor}"/>
+        <lightning:button label="#d073e0" class="colorButton color6" onclick="{!c.changeTextColor}"/>
+        <lightning:button label="#5ebbff" class="colorButton color7" onclick="{!c.changeTextColor}"/>
+        <lightning:button label="#f99221" class="colorButton color8" onclick="{!c.changeTextColor}"/>
+        <lightning:button label="#bd35bd" class="colorButton color9" onclick="{!c.changeTextColor}"/>
+        <lightning:button label="#5ecbdf" class="colorButton color10" onclick="{!c.changeTextColor}"/>
+        <lightning:button label="#3cba4c" class="colorButton color11" onclick="{!c.changeTextColor}"/>
+        <lightning:button label="#f94211" class="colorButton color12" onclick="{!c.changeTextColor}"/>
+        <lightning:button label="#ffffff" class="colorButton color13" onclick="{!c.changeTextColor}"/>
+        <lightning:button label="#aaaaaa" class="colorButton color14" onclick="{!c.changeTextColor}"/>
+        <lightning:button label="#555555" class="colorButton color15" onclick="{!c.changeTextColor}"/>
+        <lightning:button label="#000000" class="colorButton color16" onclick="{!c.changeTextColor}"/>
+    </div>
+  </section>
+    </div>
+</aura:component>
